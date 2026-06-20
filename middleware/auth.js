@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const SECRET = process.env.JWT_SECRET || 'verysecretkey';
+if (!process.env.JWT_SECRET) throw new Error('JWT_SECRET env var is required');
+const SECRET = process.env.JWT_SECRET;
 
 function authMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
